@@ -48,7 +48,7 @@ bot_template='''
 user_template='''
 <div class="chat-message user">
   <div class= "avatar">
-     <img src="https://cdn.vox-cdn.com/thumbor/pgFEqJ5ZUTt3tyOBKTTg3YN26ek=/0x0:1080x718/920x613/filters:focal(477x288:649x460):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/71263353/300017093_10114630004939621_5854109382330704814_n.0.jpg" >
+     <img src="https://static.vecteezy.com/system/resources/thumbnails/002/002/257/small/beautiful-woman-avatar-character-icon-free-vector.jpg" >
   </div>
   <div class="message">{{MSG}}</div>
 </div>
@@ -113,7 +113,7 @@ def main():
         st.session_state.chat_history = None
 
     
-    st.header("Chat with IPAN Bot :books:") #Header of the chat bot
+    st.header("Welcome! Chat with IPAN Bot🤖") #Header of the chat bot
     user_question= st.text_input("Ask a question")
 
     if user_question:
@@ -121,21 +121,18 @@ def main():
 
 
     with st.sidebar:
-        st.subheader("Your Documents")
+        st.subheader("Upload multiple Documents")
         pdf_docs= st.file_uploader("Upload", accept_multiple_files=True)
-        if st.button("Process"):
+        if st.button("Process Documents"):
             with st.spinner("Processing"):
+               
                # get pdf text
-               print("raw_text here")
                raw_text= get_pdf_text(pdf_docs)
-               print(raw_text)
 
                # get the text chunks
                text_chunks = get_text_chunks(raw_text)
-               print("text_chunks here")
-               print(text_chunks)
                st.write(text_chunks)
-               print("text_chunks finished")
+               
                # create vector store 
                vectorstore = get_vectorstore(text_chunks)
 
